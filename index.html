@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>memeME</title>
+    <link rel="stylesheet" href="styles/global.css">
+</head>
+
+<body>
+    <div class="screen" onclick="toggleMenu()"></div>
+
+    <nav class="main-nav-container">
+        <div class="container flex space-between align-center">
+            <!-- <button id="menu-btn" class="menu-btn" onclick="toggleMenu()">☰</button> -->
+            <div class="main-logo">meme<span class="logo-me">me</span></div>
+            <ul class="main-menu clean-list flex">
+                <li><a class="active" href="#">Gallery</a></li>
+                <li><a class="" href="#">Memes</a></li>
+                <li><a class="" href="#">About</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="image-editor" hidden>
+        <section class="canvas-container">
+            <nav class="editor-nav">
+                <span class="close" onclick="closeEditor()">X</span>
+                <select onchange="setShape(this.value)">
+                    <option value="triangle">Triangle</option>
+                    <option value="rectangle">Rectangle</option>
+                    <option value="square">Square</option>
+                    <option value="circle">Circle</option>
+                    <option value="text">Text</option>
+                    <option value="line">Line</option>
+                </select>
+                <button onclick="clearCanvas()">Clear</button>
+                <input type="text" class="" placeholder="Write text to canvas">
+            </nav>
+            <canvas id="my-canvas" width="500" height="500" onmousedown="draw(event)" onmousemove="drag(event)"
+                onmouseup="stopDrag(event)">
+            </canvas>
+        </section>
+    </div>
+    <main class="main-images-container container">
+        <div class="images-container container">
+            <img class="image" src="design/img/1.jpg" alt="image" onclick="openEditor(this)" />
+            <img class="image" src="design/img/2.jpg" alt="image" onclick="openEditor(this)" />
+            <img class="image" src="design/img/3.jpg" alt="image" onclick="openEditor(this)" />
+            <img class="image" src="design/img/4.jpg" alt="image" onclick="openEditor(this)" />
+            <img class="image" src="design/img/5.jpg" alt="image" onclick="openEditor(this)" />
+            <img class="image" src="design/img/6.jpg" alt="image" onclick="openEditor(this)" />
+            <img class="image" src="design/img/7.jpg" alt="image" onclick="openEditor(this)" />
+            <img class="image" src="design/img/8.jpg" alt="image" onclick="openEditor(this)" />
+            <img class="image" src="design/img/9.jpg" alt="image" onclick="openEditor(this)" />
+            <img class="image" src="design/img/10.jpg" alt="image" />
+            <img class="image" src="design/img/11.jpg" alt="image" />
+            <img class="image" src="design/img/12.jpg" alt="image" />
+        </div>
+    </main>
+
+    <footer class="main-footer flex align-center">
+        <div class="footer-container container">
+            <div class="main-logo">meme<span class="logo-me-footer">me</span></div>
+            <small>© 2014 mememe.com - All Rights Reserved - Find more free Templates at Pixelhint.com</small>
+            <div class="social-links">
+                <a href="#" class="facebook"></a>
+                <a href="#" class="twitter"></a>
+                <a href="#" class="be"></a>
+                <a href="#" class="ball"></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
