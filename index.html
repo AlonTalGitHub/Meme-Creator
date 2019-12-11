@@ -36,7 +36,8 @@
                     <option value="line">Line</option>
                 </select>
                 <button onclick="clearCanvas()">Clear</button>
-                <input type="text" class="" placeholder="Write text to canvas">
+                <input type="text" class="add-header" placeholder="Write header to canvas">
+                <button class="btn btn-primary" data-trans="add-book" onclick="onDrawText()">Add Header</button>
             </nav>
             <canvas id="my-canvas" width="500" height="500" onmousedown="draw(event)" onmousemove="drag(event)"
                 onmouseup="stopDrag(event)">

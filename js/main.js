@@ -74,11 +74,15 @@ function drawArc(x, y) {
     gCtx.stroke();
 }
 
-function drawText(txt, x, y) {
+function onDrawText(x=10, y=70) {
+    var header = document.querySelector('.add-header').value;
+    gCtx.font = 'bolder 50px Impact';
+    console.log(gCtx);
+    gCtx.fillStyle = "white";
     gCtx.save()
-    gCtx.fillText(txt, x, y);
-    gCtx.strokeText(txt, x, y);
-    gCtx.restore()
+    gCtx.fillText(header, x, y);
+    gCtx.strokeText(header, x, y);
+    console.log(gCtx);
 }
 
 function drawTriangle(x, y) {
@@ -101,7 +105,7 @@ function saveAndRestoreExample() {
     gCtx.save()
     drawText('yovel1', 20, 60)
     gCtx.fillStyle = 'red'
-    gCtx.font = '50px Arial red'
+    gCtx.font = '50px Impact white'
     gCtx.strokeStyle = 'red'
     gCtx.lineWidth = 3
     drawText('yovel2', 20, 160)
