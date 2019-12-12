@@ -66,17 +66,12 @@ function addEventListeners() {
             gCanvas.width = window.innerWidth - 50;
             gCanvas.height = window.innerHeight - 100;
             drawImg();
-            // gCtx.restore()
-            // gCtx.stroke()
-        });
 
-    // gCanvas.addEventListener('mousedown', function () {console.log('mousedown')});
-    // gCanvas.addEventListener('mouseup', function () {console.log('mouseup')});
+        });
 }
 
 function drawLine(x, y) {
     gCtx.lineTo(x, y);
-    // gCtx.closePath()
     gCtx.stroke();
 }
 
@@ -181,10 +176,7 @@ function draw(ev) {
 function resizeCanvas() {
     var elContainer =
         document.querySelector('.canvas-container');
-    // Note: changing the canvas dimension this way clears the canvas
     gCanvas.width = elContainer.offsetWidth - 100
     gCanvas.height = elContainer.offsetHeight - 100
-
-    // TODO: redraw..
 }
 
