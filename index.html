@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="styles/global.css">
 </head>
 
-<body>
+<body onload="init()">
     <div class="screen" onclick="toggleMenu()"></div>
 
     <nav class="main-nav-container">
@@ -36,8 +36,9 @@
                     <option value="line">Line</option>
                 </select>
                 <button onclick="clearCanvas()">Clear</button>
-                <input type="text" class="add-header" placeholder="Write header to canvas">
+                <input type="text" class="add-header" placeholder="Write header to canvas" oninput="onDrawText()">
                 <button class="btn btn-primary" data-trans="add-book" onclick="onDrawText()">Add Header</button>
+                <button class="btn btn-primary" data-trans="add-book" onclick="onDrawText(10, 450)">Add Footer</button>
             </nav>
             <canvas id="my-canvas" width="500" height="500" onmousedown="draw(event)" onmousemove="drag(event)"
                 onmouseup="stopDrag(event)">
@@ -45,19 +46,8 @@
         </section>
     </div>
     <main class="main-images-container container">
+            <input type="text" class="filter-memes" placeholder="Search" oninput="renderImages(this.value)">
         <div class="images-container container">
-            <img class="image" src="design/img/1.jpg" alt="image" onclick="openEditor(this)" />
-            <img class="image" src="design/img/2.jpg" alt="image" onclick="openEditor(this)" />
-            <img class="image" src="design/img/3.jpg" alt="image" onclick="openEditor(this)" />
-            <img class="image" src="design/img/4.jpg" alt="image" onclick="openEditor(this)" />
-            <img class="image" src="design/img/5.jpg" alt="image" onclick="openEditor(this)" />
-            <img class="image" src="design/img/6.jpg" alt="image" onclick="openEditor(this)" />
-            <img class="image" src="design/img/7.jpg" alt="image" onclick="openEditor(this)" />
-            <img class="image" src="design/img/8.jpg" alt="image" onclick="openEditor(this)" />
-            <img class="image" src="design/img/9.jpg" alt="image" onclick="openEditor(this)" />
-            <img class="image" src="design/img/10.jpg" alt="image" onclick="openEditor(this)"/>
-            <img class="image" src="design/img/11.jpg" alt="image" onclick="openEditor(this)"/>
-            <img class="image" src="design/img/12.jpg" alt="image" onclick="openEditor(this)"/>
         </div>
     </main>
 
@@ -73,7 +63,7 @@
             </div>
         </div>
     </footer>
-
+    <script src="js/memeService.js"></script>
     <script src="js/main.js"></script>
 </body>
 

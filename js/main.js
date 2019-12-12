@@ -1,18 +1,29 @@
 let gCanvas
-let gCtx, gImg
+let gCtx
 let gIsDragActive = false;
 
 let gCurrShape = 'triangle'
 
+function init() {
+    renderImages();
+}
+function renderImages(searchKeyword) {
+    var images = getImagesToRender(searchKeyword);
+    var strElImgs = images.map(function (image) {
+        return `<img class="image" src="${image.url}" alt="image" onclick="initEditor(${image.id})" />\n`
+    });
 
-function openEditor(elImg) { 
-    gImg = elImg;   
+    var elImgs = document.querySelector('.images-container');
+    elImgs.innerHTML = strElImgs.join('');
+}
+
+
+function openEditor() { 
     elmainImgs = document.querySelector('.main-images-container'); 
     elmainImgs.hidden = true;
 
     elImgEditor = document.querySelector('.image-editor');
     elImgEditor.hidden = false; 
-    initEditor();
 }
 
 function closeEditor() {
@@ -20,29 +31,43 @@ function closeEditor() {
     elImgEditor.hidden = true;
     elmainImgs = document.querySelector('.main-images-container');
     elmainImgs.hidden = false; 
+    
 }
-
 
 // ############ canvas operations ############
 
-function initEditor() {
+function initEditor(imageId) {
+    onSetCurrImg(imageId);
+    onUpdateMeme(imageId);
+    openEditor();
     gCanvas = document.querySelector('#my-canvas');
     gCtx = gCanvas.getContext('2d');
     drawImg();
-    addEventListeners();
-    window.addEventListener('resize',
-        function () {
-            gCanvas.width = window.innerWidth - 50
-            gCanvas.height = window.innerHeight - 100;
-        })
 }
 
+function onUpdateMeme(imageId){
+    updateMeme(imageId);
+}
+
+function onSetCurrImg(imageId) {
+    setCurrImg(imageId);
+}
+
+function drawImg() {
+        elCurrImg = new Image();
+        let currImg = getCurrImage();
+        elCurrImg.src = currImg.url;
+        gCtx.drawImage(elCurrImg, 0, 0, gCanvas.width, gCanvas.height)
+}
 
 function addEventListeners() {
     window.addEventListener('resize',
         function () {
-            gCanvas.width = window.innerWidth - 50
+            gCanvas.width = window.innerWidth - 50;
             gCanvas.height = window.innerHeight - 100;
+            drawImg();
+            // gCtx.restore()
+            // gCtx.stroke()
         });
 
     // gCanvas.addEventListener('mousedown', function () {console.log('mousedown')});
@@ -58,10 +83,9 @@ function drawLine(x, y) {
 function drawRect(x, y) {
     gCtx.save()
     gCtx.beginPath();
-    gCtx.rect(x, y, 150, 150)
-    gCtx.fillStyle = 'orange'
-    gCtx.fillRect(x, y, 150, 150)
-    // gCtx.strokeStyle = 'red'
+    gCtx.rect(x, y, 50, 50)
+    gCtx.fillStyle = 'blue'
+    gCtx.fillRect(x, y, 50, 50)
     gCtx.stroke()
     gCtx.closePath()
     gCtx.restore()
@@ -69,21 +93,22 @@ function drawRect(x, y) {
 
 function drawArc(x, y) {
     gCtx.beginPath();
-    gCtx.strokeStyle = 'red'
+    gCtx.strokeStyle = 'black'
     gCtx.arc(x, y, 50, 0, Math.PI * 2)
     gCtx.stroke();
 }
 
 function onDrawText(x=10, y=70) {
     var header = document.querySelector('.add-header').value;
-    gCtx.font = 'bolder 50px Impact';
-    console.log(gCtx);
+    gCtx.beginPath();
+    gCtx.font = 'bold 50px Impact';
     gCtx.fillStyle = "white";
+    gCtx.strokeStyle = 'black'
     gCtx.save()
-    gCtx.fillText(header, x, y);
-    gCtx.strokeText(header, x, y);
-    console.log(gCtx);
+    gCtx.fillText(header.toUpperCase(), x, y);
+    gCtx.strokeText(header.toUpperCase(), x, y);
 }
+
 
 function drawTriangle(x, y) {
     gCtx.save()
@@ -94,45 +119,14 @@ function drawTriangle(x, y) {
     gCtx.closePath()
     gCtx.strokeStyle = 'blue'
     gCtx.fillStyle = '#ff0000'
-
     gCtx.stroke();
     gCtx.fill()
     gCtx.restore()
 
 }
 
-function saveAndRestoreExample() {
-    gCtx.save()
-    drawText('yovel1', 20, 60)
-    gCtx.fillStyle = 'red'
-    gCtx.font = '50px Impact white'
-    gCtx.strokeStyle = 'red'
-    gCtx.lineWidth = 3
-    drawText('yovel2', 20, 160)
-    gCtx.restore()
-    drawText('yovel3', 20, 260)
-}
-
 function clearCanvas() {
-    gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height)
-    // You may clear part of the canvas
-    // gCtx.clearRect(50, 50, 100, 100)
-}
-
-function drawImg() {
-    // const img = document.querySelector('img');
-    // gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
-    if (gImg)
-        gCtx.drawImage(gImg, 0, 0, gCanvas.width, gCanvas.height)
-    else {
-        gImg = new Image()
-        gImg.onload = () => {
-            gCtx.drawImage(gImg, 0, 0, gCanvas.width, gCanvas.height)
-        };
-        gImg.src = 'img/cute.jpg'
-    }
-    // NOTE: the proportion of the image - should be as the canvas,
-    // otherwise the image gets distorted
+    drawImg();
 }
 
 function downloadCanvas(elLink) {
