@@ -61,6 +61,14 @@ a {
     font-weight: 700;
 }
 
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+  }
+
 /* Layout */
 
 .container {
@@ -71,10 +79,10 @@ a {
     
 }
 
-/* canvas */
+/* canvas editor*/
 
 .canvas-container{
-    background-color: rgb(255, 255, 226);
+    background-color: #f8f8f8;
     padding: 10px;
 }
 #my-canvas {
@@ -84,6 +92,27 @@ a {
 }
 
 .close {
+    cursor: pointer;
+    font-size: 2rem;
+
+}
+
+.btn-editor {
+    padding-left: 16px;
+    padding-right: 20px;
+    line-height: 2.2em;
+    border: 0.125em solid #c2c2c2;
+    border-radius: 1000px;
+    font-family: lato, sans-serif;
+    color: #919191;
+    background-color: #ffffff;
+    transition: padding .6s;
+    position: relative;
+}
+
+.btn-editor:hover {
+    color: #58c93a;
+    border-color: #58c93a;
     cursor: pointer;
 }
 /* // Main Navbar // */
@@ -221,7 +250,7 @@ a {
 
 .main-footer {
     background-color: #f8f8f8;
-    height: 270px;
+    height: 230px;
 }
 
 /* Helpers */

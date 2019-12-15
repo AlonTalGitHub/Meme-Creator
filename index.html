@@ -25,9 +25,10 @@
     </nav>
     <div class="image-editor" hidden>
         <section class="canvas-container">
-            <nav class="editor-nav">
+            <nav class="editor-manu-bar">
                 <span class="close" onclick="closeEditor()">X</span>
-                <select onchange="setShape(this.value)">
+                <input type="text" class="add-header" placeholder="Write header to canvas" oninput="onDrawText()">
+                <select class="btn-editor" onchange="setShape(this.value)">
                     <option value="triangle">Triangle</option>
                     <option value="rectangle">Rectangle</option>
                     <option value="square">Square</option>
@@ -35,10 +36,11 @@
                     <option value="text">Text</option>
                     <option value="line">Line</option>
                 </select>
-                <button onclick="clearCanvas()">Clear</button>
-                <input type="text" class="add-header" placeholder="Write header to canvas" oninput="onDrawText()">
-                <button class="btn btn-primary" data-trans="add-book" onclick="onDrawText()">Add Header</button>
-                <button class="btn btn-primary" data-trans="add-book" onclick="onDrawText(10, 450)">Add Footer</button>
+                <button class="btn btn-editor" onclick="clearCanvas()">Clear</button>
+                <button class="btn btn-editor" data-trans="text" onclick="onChangeLineLocation(0, -10)">Up</button>
+                <button class="btn btn-editor" data-trans="text" onclick="onChangeLineLocation(0, 10)">Down</button>
+                <button class="btn btn-editor" data-trans="text-font" onclick="onChangeFontSize(5, 0)">A+</button>
+                <button class="btn btn-editor" data-trans="text-font" onclick="onChangeFontSize(-5, 0)">A-</button>
             </nav>
             <canvas id="my-canvas" width="500" height="500" onmousedown="draw(event)" onmousemove="drag(event)"
                 onmouseup="stopDrag(event)">
@@ -46,7 +48,7 @@
         </section>
     </div>
     <main class="main-images-container container">
-            <input type="text" class="filter-memes" placeholder="Search" oninput="renderImages(this.value)">
+        <input type="text" class="filter-memes" placeholder="Search" oninput="renderImages(this.value)">
         <div class="images-container container">
         </div>
     </main>

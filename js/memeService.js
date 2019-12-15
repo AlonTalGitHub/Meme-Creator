@@ -29,10 +29,12 @@ var gMeme = {
     selectedTxtIdx: 0,
     txts: [
         {
-            line: 'I never eat Falafel',
-            size: 20,
+            line: '',
+            size: 30,
+            lineXAxis: 10, 
+            lineYAxis: 70,
             align: 'left',
-            color: 'red'
+            color: 'white'
         }
     ]
 }
@@ -66,4 +68,29 @@ function setCurrImg(imageId) {
 function getCurrImage() {
     return gCurrImg;
 }
+
+function changeLineContent(memeObg, contentInput, txtIdx=0) {
+    memeObg.txts[txtIdx].line = contentInput; 
+}
+
+function changeLineLocation(xDiff, yDiff, txtIdx=0) {
+    const xCoord = gMeme.txts[txtIdx].lineXAxis;
+    const yCoord = gMeme.txts[txtIdx].lineYAxis;
+    if ((yCoord < 50 && yDiff < 0) || (yCoord > 480 && yDiff > 0)) return;
+    gMeme.txts[txtIdx].lineXAxis += xDiff;
+    gMeme.txts[txtIdx].lineYAxis += yDiff;
+}
+
+
+function changeFontSize(sizeDiff, txtIdx=0) {
+    const fontSize = getFontSize(txtIdx);
+    if ((fontSize <= 10 && sizeDiff < 0) || (fontSize > 40 && sizeDiff > 0)) return;
+    gMeme.txts[txtIdx].size += sizeDiff;
+}
+
+
+function getFontSize(txtIdx=0) {
+    return gMeme.txts[txtIdx].size;
+}
+
 
